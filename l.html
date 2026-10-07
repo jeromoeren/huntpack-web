@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HuntPack – Share your location</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .big {
+    display: block;
+    width: 100%;
+    margin: 24px 0 8px;
+    padding: 18px 16px;
+    border: 0;
+    border-radius: 14px;
+    background: var(--accent);
+    color: #fff;
+    font: 600 1.2rem/1.2 inherit;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .big:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+  .box {
+    margin: 20px 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #1d201c;
+  }
+  .ok {
+    border-left: 4px solid #3fb950;
+  }
+  .err {
+    border-left: 4px solid #f85149;
+  }
+  .incident {
+    font-weight: 600;
+  }
+  [hidden] {
+    display: none !important;
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>Share your location</h1>
+<p id="intro">You got this link by text message from someone in a wildlife team using the HuntPack app. They are following up on <span id="incident" class="incident">a wildlife incident</span> (for example a collision with an animal) and need to know exactly where it happened.</p>
+<p id="how">Stand at the place, or as close as you can, and tap the button. Your phone will ask if it may share your location – choose <strong>Allow</strong>.</p>
+
+<button id="share" class="big" type="button" disabled>Share my location</button>
+<p id="small" class="muted">Your location is sent once, only when you tap the button. Nothing else is shared.</p>
+
+<div id="status" class="box" hidden></div>
+
+<p class="muted" id="fallback">If you can't share your location, call back the person who sent you the link and describe the place.</p>
+<p class="muted"><a href="privacy.html#sms-location">Privacy</a></p>
+</main>
+<script src="l.js"></script>
+</body>
+</html>
