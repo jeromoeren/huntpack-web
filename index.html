@@ -19,6 +19,40 @@
     gap: 18px;
     margin: 8px 0 12px;
   }
+  main.wide {
+    max-width: 960px;
+  }
+  .phone {
+    margin: 8px auto 32px;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 44px;
+    background: #050605;
+    border: 1px solid #2c302c;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  }
+  .phone img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 34px;
+  }
+  @media (max-width: 860px) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .features {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 720px) {
+    .phone {
+      max-width: 280px;
+    }
+  }
   .hero img {
     width: 84px;
     height: 84px;
@@ -35,8 +69,9 @@
     font-size: 1.1rem;
   }
   .lang {
-    float: right;
-    margin-top: -8px;
+    display: flex;
+    justify-content: flex-end;
+    margin: -16px 0 8px;
     font-size: 0.95rem;
   }
   .lang button {
@@ -53,7 +88,7 @@
   }
   .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 12px;
     margin: 28px 0;
     padding: 0;
@@ -80,6 +115,30 @@
     border-radius: 8px;
     background: #1d201c;
   }
+  .contact {
+    margin: 32px 0 0;
+    padding: 22px 24px;
+    border-radius: 14px;
+    background: #1d201c;
+  }
+  .contact h2 {
+    margin: 0 0 6px;
+  }
+  .contact p {
+    margin: 0 0 16px;
+    color: var(--muted);
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
   footer {
     margin-top: 40px;
     color: var(--muted);
@@ -95,7 +154,7 @@
 </style>
 </head>
 <body>
-<main>
+<main class="wide">
 <div class="lang">
   <button type="button" data-set="nb">Norsk</button>
   <button type="button" data-set="en">English</button>
@@ -146,8 +205,20 @@
   </li>
 </ul>
 
+<div class="phone">
+  <img class="nb" src="screen-map.jpg" width="720" height="1560" alt="Kartet i HuntPack under en jaktdag: jegerne på postene, hundeføreren og hunden med spor, en observasjon av elg, vind og jaktgrensen.">
+  <img class="en" src="screen-map.jpg" width="720" height="1560" alt="The HuntPack map during a hunt day: hunters on their stands, the dog handler and the dog with tracks, a moose sighting, wind and the hunting boundary.">
+</div>
+
 <p class="status nb">HuntPack testes nå av jaktlag og kommer snart på Google Play.</p>
 <p class="status en">HuntPack is being tested by hunting teams and will soon be on Google Play.</p>
+
+<section class="contact">
+  <h2 class="nb">Ta kontakt</h2><h2 class="en">Get in touch</h2>
+  <p class="nb">Har du spørsmål, ønsker eller lyst til å prøve HuntPack med jaktlaget ditt? Send oss en e-post, så svarer vi så fort vi kan.</p>
+  <p class="en">Questions, ideas, or want to try HuntPack with your hunting team? Send us an email and we will get back to you as soon as we can.</p>
+  <a class="button" href="mailto:support@huntpack.app">✉ support@huntpack.app</a>
+</section>
 
 <footer>
   <p>
