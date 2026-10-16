@@ -1,20 +1,180 @@
 <!doctype html>
-<html lang="en">
+<html lang="nb">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HuntPack</title>
+<title>HuntPack – kartet for jaktlaget</title>
+<meta name="description" content="HuntPack er kartet for jaktlaget: se hvor alle er, poster, vind, jaktdager og grenser. Fungerer uten dekning.">
+<meta property="og:title" content="HuntPack">
+<meta property="og:description" content="Kartet for jaktlaget: se hvor alle er, poster, vind, jaktdager og grenser.">
+<meta property="og:image" content="https://huntpack.app/icon-512.png">
+<meta name="theme-color" content="#121412">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 8px 0 12px;
+  }
+  .hero img {
+    width: 84px;
+    height: 84px;
+    border-radius: 20px;
+    flex: none;
+  }
+  .hero h1 {
+    margin: 0;
+    font-size: 2.2rem;
+  }
+  .tagline {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+  .lang {
+    float: right;
+    margin-top: -8px;
+    font-size: 0.95rem;
+  }
+  .lang button {
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    padding: 4px 6px;
+  }
+  .lang button[aria-pressed='true'] {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+    gap: 12px;
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+  }
+  .features li {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #1d201c;
+  }
+  .features strong {
+    display: block;
+    margin-bottom: 2px;
+  }
+  .features span {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+  .status {
+    padding: 14px 16px;
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    background: #1d201c;
+  }
+  footer {
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  footer a {
+    margin-right: 16px;
+  }
+  [lang='en'] .nb,
+  [lang='nb'] .en {
+    display: none;
+  }
+</style>
 </head>
 <body>
 <main>
-<h1>HuntPack</h1>
-<p>The map for your hunting team: live positions, stands, wind, hunt days and boundaries.</p>
-<ul>
-  <li><a href="privacy.html">Privacy policy</a></li>
-  <li><a href="delete-account.html">Delete your account</a></li>
+<div class="lang">
+  <button type="button" data-set="nb">Norsk</button>
+  <button type="button" data-set="en">English</button>
+</div>
+
+<div class="hero">
+  <img src="icon-192.png" alt="">
+  <div>
+    <h1>HuntPack</h1>
+    <p class="tagline nb">Kartet for jaktlaget</p>
+    <p class="tagline en">The map for your hunting team</p>
+  </div>
+</div>
+
+<p class="nb">Se hvor alle på laget er, sett ut poster og merker, følg vinden og hold styr på jaktdagen – på et felles kart som fungerer også der det ikke er dekning.</p>
+<p class="en">See where everyone on the team is, place stands and marks, follow the wind and keep track of the hunt day – on a shared map that works even without coverage.</p>
+
+<ul class="features">
+  <li>
+    <strong class="nb">Hvor er alle?</strong><strong class="en">Where is everyone?</strong>
+    <span class="nb">Posisjon og spor for jegerne og hundene på laget, med batterinivå.</span>
+    <span class="en">Positions and tracks for the hunters and dogs on the team, with battery level.</span>
+  </li>
+  <li>
+    <strong class="nb">Poster og merker</strong><strong class="en">Stands and marks</strong>
+    <span class="nb">Poster, observasjoner, skudd og ettersøk – synlig for hele laget.</span>
+    <span class="en">Stands, sightings, shots and tracking – visible to the whole team.</span>
+  </li>
+  <li>
+    <strong class="nb">Vind</strong><strong class="en">Wind</strong>
+    <span class="nb">Vindretning og -styrke på kartet, så du ser hvor vitringen går.</span>
+    <span class="en">Wind direction and strength on the map, so you see where your scent goes.</span>
+  </li>
+  <li>
+    <strong class="nb">Jaktdager</strong><strong class="en">Hunt days</strong>
+    <span class="nb">Hvem som jakter i dag, jaktform, og rapport om sett og skutt.</span>
+    <span class="en">Who is hunting today, the type of hunt, and a report of animals seen and shot.</span>
+  </li>
+  <li>
+    <strong class="nb">Grenser og kart</strong><strong class="en">Boundaries and maps</strong>
+    <span class="nb">Jaktfeltets grenser, topografiske kart og flyfoto.</span>
+    <span class="en">Hunting ground boundaries, topographic maps and aerial photos.</span>
+  </li>
+  <li>
+    <strong class="nb">Uten dekning</strong><strong class="en">No coverage</strong>
+    <span class="nb">Last ned kartet på forhånd. Det du legger inn, sendes når du får nett igjen.</span>
+    <span class="en">Download the map in advance. What you add is sent when you are back online.</span>
+  </li>
 </ul>
-<p class="muted">Contact: <a href="mailto:mareritt@gmail.com">mareritt@gmail.com</a></p>
+
+<p class="status nb">HuntPack testes nå av jaktlag og kommer snart på Google Play.</p>
+<p class="status en">HuntPack is being tested by hunting teams and will soon be on Google Play.</p>
+
+<footer>
+  <p>
+    <a href="privacy.html"><span class="nb">Personvern</span><span class="en">Privacy policy</span></a>
+    <a href="delete-account.html"><span class="nb">Slett konto</span><span class="en">Delete your account</span></a>
+    <a href="mailto:mareritt@gmail.com"><span class="nb">Kontakt</span><span class="en">Contact</span></a>
+  </p>
+</footer>
 </main>
+<script>
+  (function () {
+    var root = document.documentElement;
+    function set(lang) {
+      root.lang = lang;
+      document.querySelectorAll('[data-set]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.set === lang));
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    var nordic = /^(nb|nn|no|sv|da)/i.test(navigator.language || '');
+    set(saved || (nordic ? 'nb' : 'en'));
+    document.querySelectorAll('[data-set]').forEach(function (b) {
+      b.addEventListener('click', function () { set(b.dataset.set); });
+    });
+  })();
+</script>
 </body>
 </html>
