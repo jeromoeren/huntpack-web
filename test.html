@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test HuntPack på Android</title>
+<meta name="description" content="Bli med og test HuntPack – appen for jaktlaget – på Android før den kommer på Google Play.">
+<meta property="og:title" content="Test HuntPack på Android">
+<meta property="og:description" content="Bli med og test appen for jaktlaget før den kommer på Google Play.">
+<meta property="og:image" content="https://huntpack.app/icon-512.png">
+<meta name="theme-color" content="#121412">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  main.wide {
+    max-width: 900px;
+  }
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 8px 0 20px;
+  }
+  .hero img {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    flex: none;
+  }
+  .hero h1 {
+    margin: 0;
+  }
+  .hero p {
+    margin: 2px 0 0;
+    color: var(--muted);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 36px;
+    align-items: start;
+  }
+  .box {
+    margin: 24px 0;
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: #1d201c;
+  }
+  .box h2 {
+    margin: 0 0 8px;
+  }
+  .box ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .steps li {
+    position: relative;
+    margin: 0 0 18px;
+    padding-left: 46px;
+    counter-increment: step;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    line-height: 32px;
+  }
+  .steps strong {
+    display: block;
+  }
+  .steps p {
+    margin: 2px 0 10px;
+    color: var(--muted);
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 12px;
+    background: #3e9a52;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .thanks {
+    padding: 14px 16px;
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    background: #1d201c;
+  }
+  .phone {
+    position: sticky;
+    top: 24px;
+    padding: 9px;
+    border-radius: 40px;
+    background: #050605;
+    border: 1px solid #2c302c;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  }
+  .phone img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 31px;
+  }
+  footer {
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  footer a {
+    margin-right: 16px;
+  }
+  @media (max-width: 760px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .phone {
+      position: static;
+      max-width: 240px;
+      margin: 0 auto;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="wide">
+<div class="hero">
+  <img src="icon-192.png" alt="">
+  <div>
+    <h1>Test HuntPack på Android</h1>
+    <p>Appen for jaktlaget</p>
+  </div>
+</div>
+
+<div class="layout">
+<div>
+  <p>HuntPack er en app der jaktlaget ser hvor alle er, setter ut poster, følger vinden og holder styr på jaktdagen – på et felles kart som virker også uten dekning.</p>
+  <p>Før appen kan legges ut på Google Play, krever Google at minst 12 personer har testet den i 14 dager. Derfor trenger jeg hjelp fra deg som har en Android-telefon.</p>
+
+  <section class="box">
+    <h2>Hva innebærer det?</h2>
+    <ul>
+      <li>Du installerer HuntPack fra Google Play og har den på telefonen i minst 14 dager.</li>
+      <li>Du trenger ikke bruke den mye. Åpne den gjerne noen ganger, alene eller med jaktlaget.</li>
+      <li>Ser du feil eller har ønsker, setter jeg pris på en e-post – men det er helt frivillig.</li>
+      <li>Det er gratis, og du kan melde deg av når du vil.</li>
+    </ul>
+  </section>
+
+  <h2>Slik blir du med</h2>
+  <ol class="steps">
+    <li>
+      <strong>Bli med i testgruppen</strong>
+      <p>Bruk den samme Google-kontoen som på telefonen.</p>
+      <a class="button" href="https://groups.google.com/g/hunpack-testers">Bli med i gruppen</a>
+    </li>
+    <li>
+      <strong>Bli tester</strong>
+      <p>Trykk «Bli testdeltaker» på siden som åpnes.</p>
+      <a class="button" href="https://play.google.com/apps/testing/no.huntpack.app">Bli tester</a>
+    </li>
+    <li>
+      <strong>Last ned appen</strong>
+      <p>Installer HuntPack fra Google Play og lag en konto i appen.</p>
+      <a class="button" href="https://play.google.com/store/apps/details?id=no.huntpack.app">Åpne Google Play</a>
+    </li>
+  </ol>
+
+  <p class="thanks">Tusen takk for at du hjelper til! Det betyr mye for at HuntPack kommer ut til alle jaktlag.</p>
+
+  <p class="muted">Har du iPhone? Da kan du teste via <a href="https://testflight.apple.com/join/gMz3jkxw">TestFlight</a>. Spørsmål? Send en e-post til <a href="mailto:support@huntpack.app">support@huntpack.app</a>.</p>
+</div>
+
+<div class="phone">
+  <img src="screen-map.jpg" width="720" height="1560" alt="Kartet i HuntPack under en jaktdag: jegerne på postene, hundeføreren og hunden med spor, en observasjon av elg, vind og jaktgrensen.">
+</div>
+</div>
+
+<footer>
+  <p>
+    <a href="/">HuntPack</a>
+    <a href="privacy.html">Personvern</a>
+    <a href="mailto:support@huntpack.app">Kontakt</a>
+  </p>
+</footer>
+</main>
+</body>
+</html>
