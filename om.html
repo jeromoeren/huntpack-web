@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Om HuntPack – Romøren Enterprises AS</title>
+<meta name="description" content="HuntPack er laget og drives av Romøren Enterprises AS, Gol.">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  .lang {
+    display: flex;
+    justify-content: flex-end;
+    margin: -16px 0 8px;
+    font-size: 0.95rem;
+  }
+  .lang button {
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    padding: 4px 6px;
+  }
+  .lang button[aria-pressed='true'] {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .logo {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    margin: 24px 0 32px;
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 8px 20px;
+    margin: 24px 0;
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: #1d201c;
+  }
+  .facts dt {
+    color: var(--muted);
+  }
+  .facts dd {
+    margin: 0;
+  }
+  footer {
+    margin-top: 40px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  footer a {
+    margin-right: 16px;
+  }
+  [lang='en'] .nb,
+  [lang='nb'] .en {
+    display: none;
+  }
+</style>
+</head>
+<body>
+<main>
+<div class="lang">
+  <button type="button" data-set="nb">Norsk</button>
+  <button type="button" data-set="en">English</button>
+</div>
+
+<img class="logo" src="romoren-logo.svg" width="300" height="84" alt="Romøren Enterprises AS">
+
+<h1><span class="nb">Om oss</span><span class="en">About us</span></h1>
+<p class="nb">HuntPack er laget og drives av Romøren Enterprises AS, et norsk selskap på Gol i Hallingdal.</p>
+<p class="en">HuntPack is made and run by Romøren Enterprises AS, a Norwegian company based in Gol, Hallingdal.</p>
+
+<dl class="facts">
+  <dt><span class="nb">Selskap</span><span class="en">Company</span></dt>
+  <dd>Romøren Enterprises AS</dd>
+  <dt><span class="nb">Org.nr.</span><span class="en">Org. no.</span></dt>
+  <dd><a href="https://virksomhet.brreg.no/nb/oppslag/enheter/932448637">932 448 637</a></dd>
+  <dt><span class="nb">Adresse</span><span class="en">Address</span></dt>
+  <dd>Tronderudvegen 4<br>3550 Gol<br><span class="nb">Norge</span><span class="en">Norway</span></dd>
+  <dt><span class="nb">E-post</span><span class="en">Email</span></dt>
+  <dd><a href="mailto:support@huntpack.app">support@huntpack.app</a></dd>
+</dl>
+
+<footer>
+  <p>
+    <a href="/">HuntPack</a>
+    <a href="privacy.html"><span class="nb">Personvern</span><span class="en">Privacy policy</span></a>
+    <a href="mailto:support@huntpack.app"><span class="nb">Kontakt</span><span class="en">Contact</span></a>
+  </p>
+</footer>
+</main>
+<script>
+  (function () {
+    var root = document.documentElement;
+    function set(lang) {
+      root.lang = lang;
+      document.querySelectorAll('[data-set]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.set === lang));
+      });
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    var nordic = /^(nb|nn|no|sv|da)/i.test(navigator.language || '');
+    set(saved || (nordic ? 'nb' : 'en'));
+    document.querySelectorAll('[data-set]').forEach(function (b) {
+      b.addEventListener('click', function () { set(b.dataset.set); });
+    });
+  })();
+</script>
+</body>
+</html>
