@@ -7,6 +7,39 @@
 <title>HuntPack – Share your location</title>
 <link rel="stylesheet" href="style.css">
 <style>
+  .lang {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: -12px 0 8px;
+  }
+  .lang button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    flex: 1 1 0;
+    min-width: 72px;
+    padding: 10px 6px;
+    border: 1px solid #3a3d38;
+    border-radius: 10px;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .lang svg {
+    height: 18px;
+    width: auto;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+  }
+  .lang button[aria-pressed='true'] {
+    border-color: var(--accent);
+    color: var(--text);
+    font-weight: 600;
+  }
   .big {
     display: block;
     width: 100%;
@@ -16,8 +49,10 @@
     border-radius: 14px;
     background: var(--accent);
     color: #fff;
-    font: 600 1.2rem/1.2 inherit;
-    font-family: inherit;
+    font: inherit;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.2;
     cursor: pointer;
   }
   .big:disabled {
@@ -46,17 +81,24 @@
 </head>
 <body>
 <main>
-<h1>Share your location</h1>
-<p id="intro">You got this link by text message from someone in a wildlife team using the HuntPack app. They are following up on <span id="incident" class="incident">a wildlife incident</span> (for example a collision with an animal) and need to know exactly where it happened.</p>
-<p id="how">Stand at the place, or as close as you can, and tap the button. Your phone will ask if it may share your location – choose <strong>Allow</strong>.</p>
+<div class="lang" role="group" aria-label="Language">
+  <button type="button" data-set="nb" lang="nb"><svg viewBox="0 0 22 16" aria-hidden="true"><path fill="#ba0c2f" d="M0 0h22v16H0z"/><path fill="#fff" d="M6 0h4v16H6zM0 6h22v4H0z"/><path fill="#00205b" d="M7 0h2v16H7zM0 7h22v2H0z"/></svg>Norsk</button>
+  <button type="button" data-set="sv" lang="sv"><svg viewBox="0 0 16 10" aria-hidden="true"><path fill="#006aa7" d="M0 0h16v10H0z"/><path fill="#fecc02" d="M5 0h2v10H5zM0 4h16v2H0z"/></svg>Svenska</button>
+  <button type="button" data-set="fi" lang="fi"><svg viewBox="0 0 18 11" aria-hidden="true"><path fill="#fff" d="M0 0h18v11H0z"/><path fill="#002f6c" d="M5 0h3v11H5zM0 4h18v3H0z"/></svg>Suomi</button>
+  <button type="button" data-set="en" lang="en"><svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="gb"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#c8102e" stroke-width="4" clip-path="url(#gb)" d="M0 0l60 30m0-30L0 30"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#c8102e" stroke-width="6" d="M30 0v30M0 15h60"/></svg>English</button>
+</div>
+
+<h1 id="title">Share your location</h1>
+<p id="intro"></p>
+<p id="how"></p>
 
 <button id="share" class="big" type="button" disabled>Share my location</button>
-<p id="small" class="muted">Your location is sent once, only when you tap the button. Nothing else is shared.</p>
+<p id="small" class="muted"></p>
 
 <div id="status" class="box" hidden></div>
 
-<p class="muted" id="fallback">If you can't share your location, call back the person who sent you the link and describe the place.</p>
-<p class="muted"><a href="privacy.html#sms-location">Privacy</a></p>
+<p class="muted" id="fallback"></p>
+<p class="muted"><a id="privacy" href="privacy.html#sms-location">Privacy</a></p>
 </main>
 <script src="l.js"></script>
 </body>
