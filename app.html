@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Installer HuntPack</title>
+<link rel="canonical" href="https://huntpack.app/app">
+<meta name="description" content="Installer HuntPack – appen for jaktlaget – på iPhone eller Android.">
+<meta property="og:title" content="Installer HuntPack">
+<meta property="og:description" content="Appen for jaktlaget, på iPhone og Android.">
+<meta property="og:image" content="https://huntpack.app/icon-512.png">
+<meta name="theme-color" content="#121412">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  [lang='en'] .nb,
+  [lang='nb'] .en {
+    display: none;
+  }
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 8px 0 20px;
+  }
+  .hero img {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    flex: none;
+  }
+  .hero h1 {
+    margin: 0;
+  }
+  .hero p {
+    margin: 2px 0 0;
+    color: var(--muted);
+  }
+  .choose {
+    display: flex;
+    gap: 8px;
+    margin: 0 0 8px;
+  }
+  .choose button {
+    flex: 1 1 0;
+    padding: 12px 8px;
+    border: 1px solid #3a3d38;
+    border-radius: 12px;
+    background: none;
+    color: var(--muted);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .choose button[aria-pressed='true'] {
+    border-color: var(--accent);
+    color: var(--text);
+  }
+  /* Uten JavaScript vises begge. */
+  .js .platform {
+    display: none;
+  }
+  .js .platform.shown {
+    display: block;
+  }
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .steps li {
+    position: relative;
+    margin: 0 0 18px;
+    padding-left: 46px;
+    counter-increment: step;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    line-height: 32px;
+  }
+  .steps strong {
+    display: block;
+  }
+  .steps p {
+    margin: 2px 0 10px;
+    color: var(--muted);
+  }
+  .steps p.wait {
+    padding: 10px 12px;
+    border-left: 4px solid #e0a020;
+    border-radius: 8px;
+    background: rgba(224, 160, 32, 0.12);
+    color: inherit;
+  }
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    border-radius: 12px;
+    background: #3e9a52;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .next {
+    margin: 28px 0;
+    padding: 14px 16px;
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    background: #1d201c;
+  }
+  .next p {
+    margin: 0;
+  }
+  .langs {
+    margin-top: 40px;
+  }
+  .langs button {
+    margin-right: 16px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  footer {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  footer a {
+    margin-right: 16px;
+  }
+</style>
+</head>
+<body>
+<main>
+<div class="hero">
+  <img src="icon-192.png" alt="">
+  <div>
+    <h1><span class="nb">Installer HuntPack</span><span class="en">Install HuntPack</span></h1>
+    <p><span class="nb">Appen for jaktlaget</span><span class="en">The app for the hunting team</span></p>
+  </div>
+</div>
+
+<p class="nb">HuntPack er i testperioden før den kommer i App Store og på Google Play. Slik installerer du testversjonen:</p>
+<p class="en">HuntPack is being tested before it comes to the App Store and Google Play. This is how you install the test version:</p>
+
+<div class="choose" role="group">
+  <button type="button" data-platform="ios">iPhone</button>
+  <button type="button" data-platform="android">Android</button>
+</div>
+
+<section class="platform" id="ios">
+  <h2>iPhone</h2>
+  <ol class="steps">
+    <li>
+      <strong><span class="nb">Installer TestFlight</span><span class="en">Install TestFlight</span></strong>
+      <p class="nb">Apples app for testversjoner. Har du den fra før, gå videre til steg 2.</p>
+      <p class="en">Apple's app for test versions. If you already have it, go on to step 2.</p>
+      <a class="button" href="https://apps.apple.com/app/testflight/id899247664"><span class="nb">TestFlight i App Store</span><span class="en">TestFlight on the App Store</span></a>
+    </li>
+    <li>
+      <strong><span class="nb">Installer HuntPack</span><span class="en">Install HuntPack</span></strong>
+      <p class="nb">Trykk på knappen, så «Godta» og «Installer» i TestFlight. Du trenger ingen kode.</p>
+      <p class="en">Tap the button, then «Accept» and «Install» in TestFlight. You don't need a code.</p>
+      <a class="button" href="https://testflight.apple.com/join/gMz3jkxw"><span class="nb">Installer HuntPack</span><span class="en">Install HuntPack</span></a>
+    </li>
+  </ol>
+</section>
+
+<section class="platform" id="android">
+  <h2>Android</h2>
+  <ol class="steps">
+    <li>
+      <strong><span class="nb">Bli med i testgruppen</span><span class="en">Join the test group</span></strong>
+      <p class="nb">Bruk den samme Google-kontoen som på telefonen.</p>
+      <p class="en">Use the same Google account as on your phone.</p>
+      <a class="button" href="https://groups.google.com/g/huntpack-testers"><span class="nb">Bli med i gruppen</span><span class="en">Join the group</span></a>
+    </li>
+    <li>
+      <strong><span class="nb">Bli tester</span><span class="en">Become a tester</span></strong>
+      <p class="nb">Trykk «Bli testdeltaker» på siden som åpnes.</p>
+      <p class="en">Tap «Become a tester» on the page that opens.</p>
+      <a class="button" href="https://play.google.com/apps/testing/no.huntpack.app"><span class="nb">Bli tester</span><span class="en">Become a tester</span></a>
+    </li>
+    <li>
+      <strong><span class="nb">Installer fra Google Play</span><span class="en">Install from Google Play</span></strong>
+      <p class="wait nb"><b>Vent noen minutter etter steg 2.</b> Står det at appen ikke finnes, vent litt og prøv igjen. Sjekk også at Play Butikk bruker den samme Google-kontoen (trykk på profilbildet øverst).</p>
+      <p class="wait en"><b>Wait a few minutes after step 2.</b> If it says the app isn't available, wait a little and try again. Also check that the Play Store uses the same Google account (tap your profile picture at the top).</p>
+      <a class="button" href="https://play.google.com/store/apps/details?id=no.huntpack.app"><span class="nb">Åpne Google Play</span><span class="en">Open Google Play</span></a>
+    </li>
+  </ol>
+</section>
+
+<div class="next">
+  <p class="nb"><b>Når appen er installert:</b> åpne HuntPack, registrer deg med e-posten din, og bli med på laget med lagkoden du har fått.</p>
+  <p class="en"><b>Once the app is installed:</b> open HuntPack, sign up with your email, and join the team with the team code you were given.</p>
+</div>
+
+<p class="muted"><span class="nb">Spørsmål? Send en e-post til</span><span class="en">Questions? Email</span> <a href="mailto:support@huntpack.app">support@huntpack.app</a>.</p>
+
+<p class="langs"><button type="button" data-set="nb">Norsk</button><button type="button" data-set="en">English</button></p>
+
+<footer>
+  <p>
+    <a href="/">HuntPack</a>
+    <a href="privacy.html"><span class="nb">Personvern</span><span class="en">Privacy</span></a>
+    <a href="om.html"><span class="nb">Om oss</span><span class="en">About us</span></a>
+  </p>
+  <p>HuntPack · Romøren Enterprises AS · <span class="nb">org.nr.</span><span class="en">org. no.</span> 932 448 637</p>
+</footer>
+</main>
+<script>
+  (function () {
+    var root = document.documentElement;
+    root.classList.add('js');
+
+    function setLang(lang) {
+      root.lang = lang;
+      try { localStorage.setItem('lang', lang); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem('lang'); } catch (e) {}
+    var nordic = /^(nb|nn|no|sv|da)/i.test(navigator.language || '');
+    setLang(saved || (nordic ? 'nb' : 'en'));
+    document.querySelectorAll('[data-set]').forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.dataset.set); });
+    });
+
+    // Vis stegene for telefonen siden åpnes på; knappene bytter.
+    function show(platform) {
+      document.querySelectorAll('.platform').forEach(function (s) {
+        s.classList.toggle('shown', s.id === platform);
+      });
+      document.querySelectorAll('[data-platform]').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.dataset.platform === platform));
+      });
+    }
+    var ua = navigator.userAgent;
+    var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    show(ios ? 'ios' : 'android');
+    document.querySelectorAll('[data-platform]').forEach(function (b) {
+      b.addEventListener('click', function () { show(b.dataset.platform); });
+    });
+  })();
+</script>
+</body>
+</html>
