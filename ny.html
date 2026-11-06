@@ -105,13 +105,6 @@
   .button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 12px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
   .button.ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
 
-  /* Uten dekning */
-  .offline { background: var(--topo), linear-gradient(120deg, #1c2a1e, #121412 70%); background-size: 600px, auto; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .offline { padding: 56px 0; }
-  .offline .wrap { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: center; }
-  .offline .big { font-size: 3.4rem; line-height: 1; }
-  .offline h2 { margin-top: 0; }
-  .offline p { color: var(--muted); margin: 0; max-width: 46em; }
 
   /* Fallvilt */
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -136,7 +129,6 @@
   }
   @media (max-width: 560px) {
     .grid, .steps { grid-template-columns: 1fr; }
-    .offline .wrap { grid-template-columns: 1fr; }
     .phone { max-width: 260px; }
   }
 </style>
@@ -254,16 +246,6 @@
   </div>
 </section>
 
-<div class="offline">
-  <div class="wrap">
-    <div class="big">📶</div>
-    <div>
-      <h2 class="nb">Laget for skogen, ikke for byen</h2><h2 class="en">Made for the forest, not the city</h2>
-      <p class="nb">Last ned kartet hjemme. Uten dekning ser du kartet og legger inn som vanlig – det sendes til laget så fort du får nett igjen.</p>
-      <p class="en">Download the map at home. Without coverage you still see the map and add marks as usual – they reach the team as soon as you are back online.</p>
-    </div>
-  </div>
-</div>
 
 <section id="kom-i-gang">
   <div class="wrap">
