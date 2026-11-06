@@ -3,247 +3,289 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HuntPack – appen for jaktlaget</title>
+<title>HuntPack – hele jaktlaget på ett kart</title>
 <link rel="canonical" href="https://huntpack.app/">
-<meta name="description" content="HuntPack er appen for jaktlaget: se hvor alle er, poster, vind, jaktdager og grenser. Fungerer uten dekning.">
-<meta property="og:title" content="HuntPack">
-<meta property="og:description" content="Appen for jaktlaget: se hvor alle er, poster, vind, jaktdager og grenser.">
+<meta name="description" content="HuntPack er appen for jaktlaget: se hvor jegerne og hundene er, sett ut poster, følg vinden og hold styr på jaktdagen – også der det ikke er dekning.">
+<meta property="og:title" content="HuntPack – hele jaktlaget på ett kart">
+<meta property="og:description" content="Se hvor jegerne og hundene er, sett ut poster, følg vinden og hold styr på jaktdagen.">
 <meta property="og:image" content="https://huntpack.app/icon-512.png">
 <meta name="theme-color" content="#121412">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="style.css">
 <style>
-  .hero {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin: 8px 0 12px;
+  :root {
+    color-scheme: dark;
+    --bg: #121412;
+    --bg2: #171a17;
+    --panel: #1e221e;
+    --border: #2e332e;
+    --text: #edeee9;
+    --muted: #a3a69f;
+    --accent: #f76b15;
+    --green: #3e9a52;
+    --greenLight: #5fc777;
+    /* Høydekurver: svakt mønster bak toppen og båndene. */
+    --topo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cg fill='none' stroke='%235fc777' stroke-opacity='0.09' stroke-width='1.2'%3E%3Cpath d='M-20 120 C 80 60 180 160 300 110 S 520 40 620 100'/%3E%3Cpath d='M-20 160 C 90 100 190 200 300 150 S 510 80 620 140'/%3E%3Cpath d='M-20 200 C 100 150 200 240 310 195 S 500 130 620 185'/%3E%3Cpath d='M-20 250 C 110 210 210 290 320 250 S 490 190 620 240'/%3E%3Cpath d='M-20 310 C 120 280 220 350 330 315 S 480 260 620 300'/%3E%3Cpath d='M-20 380 C 130 360 230 420 340 390 S 470 340 620 370'/%3E%3Cpath d='M-20 460 C 140 450 240 500 350 470 S 460 430 620 450'/%3E%3Cpath d='M-20 540 C 150 540 250 580 360 555 S 450 520 620 535'/%3E%3Cellipse cx='420' cy='300' rx='60' ry='34'/%3E%3Cellipse cx='420' cy='300' rx='30' ry='16'/%3E%3C/g%3E%3C/svg%3E");
   }
-  main.wide {
-    max-width: 960px;
-  }
-  .phone {
-    margin: 8px auto 32px;
-    width: 100%;
-    max-width: 300px;
-    padding: 10px;
-    border-radius: 44px;
-    background: #050605;
-    border: 1px solid #2c302c;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
-  }
-  .phone img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 34px;
-  }
-  @media (max-width: 860px) {
-    .features {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 520px) {
-    .features {
-      grid-template-columns: 1fr;
-    }
-  }
-  @media (max-width: 720px) {
-    .phone {
-      max-width: 280px;
-    }
-  }
-  .hero img {
-    width: 84px;
-    height: 84px;
-    border-radius: 20px;
-    flex: none;
-  }
-  .hero h1 {
+  * { box-sizing: border-box; }
+  body {
     margin: 0;
-    font-size: 2.2rem;
-  }
-  .tagline {
-    margin: 4px 0 0;
-    color: var(--muted);
-    font-size: 1.1rem;
-  }
-  .lang {
-    display: flex;
-    justify-content: flex-end;
-    margin: -16px 0 8px;
-    font-size: 0.95rem;
-  }
-  .lang button {
-    border: 0;
-    background: none;
-    color: var(--muted);
-    font: inherit;
-    cursor: pointer;
-    padding: 4px 6px;
-  }
-  .lang button[aria-pressed='true'] {
+    background: var(--bg);
     color: var(--text);
-    font-weight: 600;
+    font: 17px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   }
-  .features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin: 28px 0;
-    padding: 0;
-    list-style: none;
+  a { color: var(--accent); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* Toppen */
+  header.top { position: sticky; top: 0; z-index: 5; background: rgba(18, 20, 18, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
+  .top .wrap { display: flex; align-items: center; gap: 20px; height: 60px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 800; font-size: 1.15rem; }
+  .brand img { width: 34px; height: 34px; border-radius: 9px; }
+  nav.links { display: flex; gap: 18px; margin-left: auto; font-size: 0.95rem; }
+  nav.links a { color: var(--muted); text-decoration: none; }
+  nav.links a:hover { color: var(--text); }
+  .login { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 10px; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
+  .login:hover { border-color: var(--greenLight); }
+  .lang { display: flex; gap: 2px; font-size: 0.9rem; }
+  .lang button { border: 0; background: none; color: var(--muted); font: inherit; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
+  .lang button[aria-pressed='true'] { color: var(--text); font-weight: 700; background: var(--panel); }
+
+  /* Hero */
+  .hero { background: var(--topo), radial-gradient(1200px 500px at 75% 10%, rgba(62, 154, 82, 0.18), transparent 60%); background-size: 600px, auto; }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding-top: 56px; padding-bottom: 56px; }
+  .eyebrow { color: var(--accent); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.8rem; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.08; margin: 10px 0 16px; letter-spacing: -0.02em; }
+  h1 em { font-style: normal; color: var(--greenLight); }
+  .lead { color: var(--muted); font-size: 1.15rem; margin: 0 0 26px; max-width: 34em; }
+  .stores { display: flex; flex-wrap: wrap; gap: 12px; }
+  .store { display: inline-flex; align-items: center; gap: 10px; padding: 9px 18px 9px 14px; border-radius: 12px; background: #000; border: 1px solid #4a4f4a; color: #fff; text-decoration: none; }
+  .store svg { width: 26px; height: 26px; fill: #fff; }
+  .store small { display: block; font-size: 0.7rem; line-height: 1; color: #cfd1cc; }
+  .store b { display: block; font-size: 1.1rem; line-height: 1.2; }
+  .note { color: var(--muted); font-size: 0.9rem; margin-top: 14px; }
+  .note a { color: var(--text); }
+
+  .phone { width: 100%; max-width: 300px; margin: 0 auto; padding: 10px; border-radius: 44px; background: #050605; border: 1px solid #2c302c; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+  .phone img { display: block; width: 100%; height: auto; border-radius: 34px; }
+  .tilt { transform: rotate(2deg); }
+
+  /* Jaktdagen */
+  section { padding: 72px 0; }
+  .center { text-align: center; max-width: 640px; margin: 0 auto 40px; }
+  h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.15; margin: 8px 0 12px; letter-spacing: -0.01em; }
+  .center p { color: var(--muted); margin: 0; }
+  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin: 0 0 72px; }
+  .story:last-child { margin-bottom: 0; }
+  .story.flip .text { order: 2; }
+  .when { display: inline-block; padding: 4px 12px; border-radius: 999px; background: rgba(62, 154, 82, 0.2); color: #7ee095; font-weight: 700; font-size: 0.85rem; }
+  .story h3 { font-size: 1.6rem; margin: 12px 0 10px; line-height: 1.2; }
+  .story p { color: var(--muted); margin: 0 0 14px; }
+  .ticks { list-style: none; padding: 0; margin: 0; }
+  .ticks li { padding: 6px 0 6px 30px; position: relative; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: 12px; width: 18px; height: 18px; border-radius: 50%; background: var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z'/%3E%3C/svg%3E") center / 13px no-repeat; }
+
+  /* Mer i appen */
+  .more { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
+  .card .icon { font-size: 1.6rem; line-height: 1; }
+  .card h4 { margin: 12px 0 6px; font-size: 1.05rem; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.5; }
+
+  /* Kom i gang */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; counter-reset: step; }
+  .steps .card { position: relative; padding-top: 58px; }
+  .steps .card::before { counter-increment: step; content: counter(step); position: absolute; top: 18px; left: 20px; width: 30px; height: 30px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .cta { text-align: center; margin-top: 28px; }
+  .button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 12px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
+  .button.ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+
+
+  /* Fallvilt */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .split .card { padding: 26px; }
+  .split h3 { margin: 10px 0 8px; font-size: 1.3rem; }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 0 48px; color: var(--muted); font-size: 0.95rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+  footer a { color: var(--muted); margin-right: 16px; }
+
+  [lang='en'] .nb, [lang='nb'] .en { display: none; }
+
+  @media (max-width: 860px) {
+    nav.links { display: none; }
+    .login { margin-left: auto; }
+    .hero .wrap, .story, .split { grid-template-columns: 1fr; }
+    .hero .wrap { padding-top: 36px; gap: 36px; }
+    .story { gap: 28px; margin-bottom: 56px; }
+    .story.flip .text { order: 0; }
+    .grid, .steps { grid-template-columns: 1fr 1fr; }
+    section { padding: 56px 0; }
   }
-  .features li {
-    margin: 0;
-    padding: 14px 16px;
-    border-radius: 12px;
-    background: #1d201c;
-  }
-  .features strong {
-    display: block;
-    margin-bottom: 2px;
-  }
-  .features span {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.45;
-  }
-  .status {
-    padding: 14px 16px;
-    border-left: 4px solid var(--accent);
-    border-radius: 8px;
-    background: #1d201c;
-  }
-  .contact {
-    margin: 32px 0 0;
-    padding: 22px 24px;
-    border-radius: 14px;
-    background: #1d201c;
-  }
-  .contact h2 {
-    margin: 0 0 6px;
-  }
-  .contact p {
-    margin: 0 0 16px;
-    color: var(--muted);
-  }
-  .button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    border-radius: 12px;
-    background: var(--accent);
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .web {
-    margin: 28px 0;
-  }
-  .web p {
-    margin: 0 0 12px;
-    color: var(--muted);
-  }
-  footer {
-    margin-top: 40px;
-    color: var(--muted);
-    font-size: 0.95rem;
-  }
-  footer a {
-    margin-right: 16px;
-  }
-  [lang='en'] .nb,
-  [lang='nb'] .en {
-    display: none;
+  @media (max-width: 560px) {
+    .grid, .steps { grid-template-columns: 1fr; }
+    .phone { max-width: 260px; }
   }
 </style>
 </head>
 <body>
-<main class="wide">
-<div class="lang">
-  <button type="button" data-set="nb">Norsk</button>
-  <button type="button" data-set="en">English</button>
-</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="icon-192.png" alt="">HuntPack</a>
+    <nav class="links">
+      <a href="#jaktdagen"><span class="nb">Funksjoner</span><span class="en">Features</span></a>
+      <a href="#kom-i-gang"><span class="nb">Kom i gang</span><span class="en">Get started</span></a>
+      <a href="#fallvilt"><span class="nb">Fallvilt</span><span class="en">Wildlife incidents</span></a>
+      <a href="#kontakt"><span class="nb">Kontakt</span><span class="en">Contact</span></a>
+    </nav>
+    <a class="login" href="https://app.huntpack.app"><span class="nb">Logg inn</span><span class="en">Log in</span></a>
+    <div class="lang">
+      <button type="button" data-set="nb">NO</button>
+      <button type="button" data-set="en">EN</button>
+    </div>
+  </div>
+</header>
 
 <div class="hero">
-  <img src="icon-192.png" alt="">
-  <div>
-    <h1>HuntPack</h1>
-    <p class="tagline nb">Appen for jaktlaget</p>
-    <p class="tagline en">The app for your hunting team</p>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow nb">Appen for jaktlaget</div><div class="eyebrow en">The app for your hunting team</div>
+      <h1 class="nb">Hele jaktlaget<br>på <em>ett kart</em></h1>
+      <h1 class="en">Your whole team<br>on <em>one map</em></h1>
+      <p class="lead nb">Se hvor jegerne og hundene er, sett ut poster, følg vinden og hold styr på jaktdagen – også der det ikke er dekning.</p>
+      <p class="lead en">See where the hunters and dogs are, place stands, follow the wind and keep track of the hunt day – even without coverage.</p>
+      <div class="stores">
+        <a class="store" href="app.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+          <span><small class="nb">Last ned for</small><small class="en">Download for</small><b>iPhone</b></span>
+        </a>
+        <a class="store" href="app.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9-.3886 1.4688 1.9466 3.3738-.0703-.1212 1.9316 3.3477.0084.0147-.0058.0218-.0078.0352C2.8064 12.0303.7698 15.0613.5967 18.5h22.9668c-.1667-3.4239-2.2082-6.4478-5.6562-8.0332-.0011-.0006.0011-.0013 0-.002l2.0332-3.5222c.0928-.1609.1543-.3485.1543-.5536 0-.3134-.1176-.6245-.3477-.8535-.2299-.2289-.5411-.3437-.8535-.3437-.6215.0037-.9606.3836-1.1508.6879zM6.7466 14.6233c-.5458 0-.9883-.4425-.9883-.9883s.4425-.9883.9883-.9883.9883.4425.9883.9883-.4425.9883-.9883.9883zm10.6624 0c-.5458 0-.9883-.4425-.9883-.9883s.4425-.9883.9883-.9883.9883.4425.9883.9883-.4425.9883-.9883.9883z"/></svg>
+          <span><small class="nb">Last ned for</small><small class="en">Download for</small><b>Android</b></span>
+        </a>
+      </div>
+      <p class="note nb">Testes nå av jaktlag i Norge · Snart i App Store og Google Play</p>
+      <p class="note en">Being tested by hunting teams in Norway · Coming soon to the App Store and Google Play</p>
+    </div>
+    <div class="phone tilt">
+      <img src="shots/hero-map.webp" width="584" height="1265" alt="HuntPack map during a hunt day: hunters on stands, the dog Bella with her track, wind with the scent cone from a stand and the hunting ground boundary">
+    </div>
   </div>
 </div>
 
-<p class="nb">Se hvor alle på laget er, sett ut poster og merker, følg vinden og hold styr på jaktdagen – på et felles kart som fungerer også der det ikke er dekning.</p>
-<p class="en">See where everyone on the team is, place stands and marks, follow the wind and keep track of the hunt day – on a shared map that works even without coverage.</p>
+<section id="jaktdagen">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow nb">En jaktdag med HuntPack</div><div class="eyebrow en">A hunt day with HuntPack</div>
+      <h2 class="nb">Fra planlegging til rapport</h2><h2 class="en">From planning to report</h2>
+    </div>
 
-<ul class="features">
-  <li>
-    <strong class="nb">Hvor er alle?</strong><strong class="en">Where is everyone?</strong>
-    <span class="nb">Posisjon og spor for jegerne og hundene på laget, med batterinivå.</span>
-    <span class="en">Positions and tracks for the hunters and dogs on the team, with battery level.</span>
-  </li>
-  <li>
-    <strong class="nb">Poster og merker</strong><strong class="en">Stands and marks</strong>
-    <span class="nb">Poster, observasjoner, skudd og ettersøk – synlig for hele laget.</span>
-    <span class="en">Stands, sightings, shots and tracking – visible to the whole team.</span>
-  </li>
-  <li>
-    <strong class="nb">Vind</strong><strong class="en">Wind</strong>
-    <span class="nb">Vindretning og -styrke på kartet, så du ser hvor vitringen går.</span>
-    <span class="en">Wind direction and strength on the map, so you see where your scent goes.</span>
-  </li>
-  <li>
-    <strong class="nb">Jaktdager</strong><strong class="en">Hunt days</strong>
-    <span class="nb">Hvem som jakter i dag, jaktform, og rapport om sett og skutt.</span>
-    <span class="en">Who is hunting today, the type of hunt, and a report of animals seen and shot.</span>
-  </li>
-  <li>
-    <strong class="nb">Grenser og kart</strong><strong class="en">Boundaries and maps</strong>
-    <span class="nb">Jaktfeltets grenser, topografiske kart og flyfoto.</span>
-    <span class="en">Hunting ground boundaries, topographic maps and aerial photos.</span>
-  </li>
-  <li>
-    <strong class="nb">Uten dekning</strong><strong class="en">No coverage</strong>
-    <span class="nb">Last ned kartet på forhånd. Det du legger inn, sendes når du får nett igjen.</span>
-    <span class="en">Download the map in advance. What you add is sent when you are back online.</span>
-  </li>
-</ul>
+    <div class="story">
+      <div class="text">
+        <span class="when nb">Før jakta</span><span class="when en">Before the hunt</span>
+        <h3 class="nb">Planlegg terrenget sammen</h3><h3 class="en">Plan the ground together</h3>
+        <p class="nb">Alt laget legger inn, ser alle andre med en gang.</p><p class="en">Everything the team adds, everyone sees right away.</p>
+        <ul class="ticks nb"><li>Grenser for jaktfeltet</li><li>Poster, stier og tegninger rett på kartet</li><li>Last ned kartet før du drar til skogs</li></ul>
+        <ul class="ticks en"><li>Hunting ground boundaries and areas</li><li>Stands, paths and drawings straight on the map</li><li>Download the map before heading out</li></ul>
+      </div>
+      <div class="phone"><img src="shots/area.webp" width="584" height="1265" alt="Hunting ground with stands, parking and an off-limits area drawn on the map" loading="lazy"></div>
+    </div>
 
-<div class="phone">
-  <img class="nb" src="screen-map.jpg" width="720" height="1560" alt="Kartet i HuntPack under en jaktdag: jegerne på postene, hundeføreren og hunden med spor, en observasjon av elg, vind og jaktgrensen.">
-  <img class="en" src="screen-map.jpg" width="720" height="1560" alt="The HuntPack map during a hunt day: hunters on their stands, the dog handler and the dog with tracks, a moose sighting, wind and the hunting boundary.">
-</div>
+    <div class="story flip">
+      <div class="text">
+        <span class="when nb">Under jakta</span><span class="when en">During the hunt</span>
+        <h3 class="nb">Vit hvor alle er</h3><h3 class="en">Know where everyone is</h3>
+        <p class="nb">Jaktradioen er fortsatt viktigst. HuntPack viser resten.</p><p class="en">The hunting radio still comes first. HuntPack shows the rest.</p>
+        <ul class="ticks nb"><li>Jegere og hunder med spor og batterinivå</li><li>Vindretning og -styrke, så du ser hvor vitringen går</li><li>Observasjoner, skudd og ettersøk for hele laget</li></ul>
+        <ul class="ticks en"><li>Hunters and dogs with tracks and battery level</li><li>Wind direction and strength, so you see where your scent goes</li><li>Sightings, shots and tracking for the whole team</li></ul>
+      </div>
+      <div class="phone"><img src="shots/live.webp" width="584" height="1265" alt="Hunters on their stands, the dog with its track and the wind with the scent cone from a stand" loading="lazy"></div>
+    </div>
 
-<p class="status nb">HuntPack testes nå av jaktlag og kommer snart for både Android og iPhone – på Google Play og App Store.</p>
-<p class="status en">HuntPack is being tested by hunting teams and is coming soon for both Android and iPhone – on Google Play and the App Store.</p>
-
-<section class="web">
-  <p class="nb">Bruker laget ditt HuntPack? Se kartet, markeringene og laget i nettleseren på PC-en, med samme innlogging.</p>
-  <p class="en">Does your team use HuntPack? See the map, the marks and your team in the browser on your PC, with the same login.</p>
-  <a class="button" href="https://app.huntpack.app"><span class="nb">🖥 Åpne HuntPack i nettleseren</span><span class="en">🖥 Open HuntPack in your browser</span></a>
+    <div class="story">
+      <div class="text">
+        <span class="when nb">Etter jakta</span><span class="when en">After the hunt</span>
+        <h3 class="nb">Spill av dagen</h3><h3 class="en">Play back the day</h3>
+        <p class="nb">Når jaktdagen eller hendelsen er avsluttet, kan du spille den av på kartet og se hva som skjedde, når og hvor.</p><p class="en">When the hunt day or incident is over, you can play it back on the map and see what happened, when and where.</p>
+        <ul class="ticks nb"><li>Jegere og hunder beveger seg langs sporene sine</li><li>Hopp mellom observasjoner, skudd og ettersøk på tidslinjen</li><li>Rapport med timer, sett og skutt for hver jeger</li></ul>
+        <ul class="ticks en"><li>Hunters and dogs move along their tracks</li><li>Jump between sightings, shots and tracking on the timeline</li><li>A report with hours, seen and shot for each hunter</li></ul>
+      </div>
+      <div class="phone"><img src="shots/playback.webp" width="584" height="1265" alt="Playback of a hunt day with the timeline, at the moment of the shot" loading="lazy"></div>
+    </div>
+  </div>
 </section>
 
-<section class="contact">
-  <h2 class="nb">Ta kontakt</h2><h2 class="en">Get in touch</h2>
-  <p class="nb">Har du spørsmål, ønsker eller lyst til å prøve HuntPack med jaktlaget ditt? Send oss en e-post, så svarer vi så fort vi kan.</p>
-  <p class="en">Questions, ideas, or want to try HuntPack with your hunting team? Send us an email and we will get back to you as soon as we can.</p>
-  <a class="button" href="mailto:support@huntpack.app">✉ support@huntpack.app</a>
+<section class="more">
+  <div class="wrap">
+    <div class="center">
+      <h2 class="nb">Mer i appen</h2><h2 class="en">More in the app</h2>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="icon">📷</div><h4 class="nb">Viltkamera</h4><h4 class="en">Trail cameras</h4><p class="nb">Bildene fra kameraet kommer rett på kartet, der kameraet står.</p><p class="en">Photos from the camera land on the map, right where it stands.</p></div>
+      <div class="card"><div class="icon">🐕</div><h4 class="nb">Hundepeilere</h4><h4 class="en">Dog trackers</h4><p class="nb">Følg hunden på kartet fra peilere som deler posisjon på nett.</p><p class="en">Follow the dog on the map from trackers that share their position online.</p></div>
+      <div class="card"><div class="icon">✏️</div><h4 class="nb">Tegn på kartet</h4><h4 class="en">Draw on the map</h4><p class="nb">Streker og områder for drev, stier og soner. Importer fra WeHunt.</p><p class="en">Lines and areas for drives, paths and zones. Import from WeHunt.</p></div>
+      <div class="card"><div class="icon">🗺️</div><h4 class="nb">Gode kart</h4><h4 class="en">Good maps</h4><p class="nb">Detaljerte topografiske kart med høydekurver, stier og terreng. Du kan også legge inn egne kart.</p><p class="en">Detailed topographic maps with contour lines, paths and terrain. You can also add your own maps.</p></div>
+      <div class="card"><div class="icon">🖥️</div><h4 class="nb">På PC-en</h4><h4 class="en">On your PC</h4><p class="nb">Se kartet og laget i nettleseren, med samme innlogging.</p><p class="en">See the map and team in the browser, with the same login.</p></div>
+      <div class="card"><div class="icon">🔔</div><h4 class="nb">Varsler</h4><h4 class="en">Notifications</h4><p class="nb">Få beskjed på telefonen når noen på jakt markerer skudd eller observasjon.</p><p class="en">Get notified when someone on the hunt marks a shot or a sighting.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="kom-i-gang">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow nb">Kom i gang</div><div class="eyebrow en">Get started</div>
+      <h2 class="nb">Laget er i gang på fem minutter</h2><h2 class="en">Your team is up and running in five minutes</h2>
+    </div>
+    <div class="steps">
+      <div class="card"><h4 class="nb">Installer appen</h4><h4 class="en">Install the app</h4><p class="nb">På iPhone eller Android.</p><p class="en">On iPhone or Android.</p></div>
+      <div class="card"><h4 class="nb">Registrer deg</h4><h4 class="en">Sign up</h4><p class="nb">Med e-post og telefonnummer. Ingen passord å huske.</p><p class="en">With email and phone number. No password to remember.</p></div>
+      <div class="card"><h4 class="nb">Bli med på laget</h4><h4 class="en">Join the team</h4><p class="nb">Bruk lagkoden du fikk, eller trykk «Bli med» på invitasjonen. Eller opprett et nytt lag.</p><p class="en">Use the team code you got, or tap «Join» on the invitation. Or create a new team.</p></div>
+    </div>
+    <div class="cta"><a class="button" href="app.html"><span class="nb">Last ned HuntPack</span><span class="en">Download HuntPack</span></a></div>
+  </div>
+</section>
+
+<section id="fallvilt" class="more">
+  <div class="wrap split">
+    <div class="card">
+      <span class="when nb">For jaktlag</span><span class="when en">For hunting teams</span>
+      <h3 class="nb">Jaktdager med hele laget</h3><h3 class="en">Hunt days with the whole team</h3>
+      <p class="nb">Hvem som jakter i dag, jaktform, poster og rapport om sett og skutt.</p>
+      <p class="en">Who is hunting today, the type of hunt, stands and a report of seen and shot.</p>
+    </div>
+    <div class="card">
+      <span class="when nb">For fallviltgrupper</span><span class="when en">For wildlife incident teams</span>
+      <h3 class="nb">Hendelser i stedet for jaktdager</h3><h3 class="en">Incidents instead of hunt days</h3>
+      <p class="nb">Påkjørsler og ettersøk på kartet, med hvem som er ute og hvor hunden går. Spill av ettersøket etterpå.</p>
+      <p class="en">Collisions and tracking on the map, with who is out and where the dog goes. Play back the search afterwards.</p>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap center">
+    <h2 class="nb">Spørsmål eller ønsker?</h2><h2 class="en">Questions or ideas?</h2>
+    <p class="nb">Vil du prøve HuntPack med jaktlaget ditt, eller har du en idé? Send oss en e-post.</p>
+    <p class="en">Want to try HuntPack with your hunting team, or have an idea? Send us an email.</p>
+    <p class="cta"><a class="button ghost" href="mailto:support@huntpack.app">✉ support@huntpack.app</a></p>
+  </div>
 </section>
 
 <footer>
-  <p>
-    <a href="privacy.html"><span class="nb">Personvern</span><span class="en">Privacy policy</span></a>
-    <a href="delete-account.html"><span class="nb">Slett konto</span><span class="en">Delete your account</span></a>
-    <a href="mailto:support@huntpack.app"><span class="nb">Kontakt</span><span class="en">Contact</span></a>
-    <a href="om.html"><span class="nb">Om oss</span><span class="en">About us</span></a>
-  </p>
-  <p>HuntPack · Romøren Enterprises AS · <span class="nb">org.nr.</span><span class="en">org. no.</span> 932 448 637</p>
+  <div class="wrap">
+    <div>
+      <a href="privacy.html"><span class="nb">Personvern</span><span class="en">Privacy policy</span></a>
+      <a href="delete-account.html"><span class="nb">Slett konto</span><span class="en">Delete your account</span></a>
+      <a href="om.html"><span class="nb">Om oss</span><span class="en">About us</span></a>
+    </div>
+    <div>HuntPack · Romøren Enterprises AS · <span class="nb">org.nr.</span><span class="en">org. no.</span> 932 448 637</div>
+  </div>
 </footer>
-</main>
+
 <script>
   (function () {
     var root = document.documentElement;
