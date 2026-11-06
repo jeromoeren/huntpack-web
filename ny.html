@@ -42,6 +42,8 @@
   nav.links { display: flex; gap: 18px; margin-left: auto; font-size: 0.95rem; }
   nav.links a { color: var(--muted); text-decoration: none; }
   nav.links a:hover { color: var(--text); }
+  .login { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 10px; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
+  .login:hover { border-color: var(--greenLight); }
   .lang { display: flex; gap: 2px; font-size: 0.9rem; }
   .lang button { border: 0; background: none; color: var(--muted); font: inherit; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
   .lang button[aria-pressed='true'] { color: var(--text); font-weight: 700; background: var(--panel); }
@@ -124,7 +126,7 @@
 
   @media (max-width: 860px) {
     nav.links { display: none; }
-    .lang { margin-left: auto; }
+    .login { margin-left: auto; }
     .hero .wrap, .story, .split { grid-template-columns: 1fr; }
     .hero .wrap { padding-top: 36px; gap: 36px; }
     .story { gap: 28px; margin-bottom: 56px; }
@@ -150,6 +152,7 @@
       <a href="#fallvilt"><span class="nb">Fallvilt</span><span class="en">Wildlife incidents</span></a>
       <a href="#kontakt"><span class="nb">Kontakt</span><span class="en">Contact</span></a>
     </nav>
+    <a class="login" href="https://app.huntpack.app"><span class="nb">Logg inn</span><span class="en">Log in</span></a>
     <div class="lang">
       <button type="button" data-set="nb">NO</button>
       <button type="button" data-set="en">EN</button>
@@ -175,8 +178,8 @@
           <span><small class="nb">Last ned for</small><small class="en">Download for</small><b>Android</b></span>
         </a>
       </div>
-      <p class="note nb">Testes nå av jaktlag i Norge · Snart i App Store og Google Play · <a href="https://app.huntpack.app">Åpne i nettleseren</a></p>
-      <p class="note en">Being tested by hunting teams in Norway · Coming soon to the App Store and Google Play · <a href="https://app.huntpack.app">Open in your browser</a></p>
+      <p class="note nb">Testes nå av jaktlag i Norge · Snart i App Store og Google Play</p>
+      <p class="note en">Being tested by hunting teams in Norway · Coming soon to the App Store and Google Play</p>
     </div>
     <div class="phone tilt">
       <div class="ph"><b class="nb">Nytt skjermbilde</b><b class="en">New screenshot</b><span class="nb">Kartet under en jaktdag: jegerne på post, hund med spor, vind og grense</span><span class="en">The map during a hunt day: hunters on stands, dog with track, wind and boundary</span></div>
